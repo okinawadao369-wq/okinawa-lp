@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沖縄 非公開リゾート案件 | 投資家限定</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #c8b89a;
+    --deep: #1a1610;
+    --ocean: #1b3a4b;
+    --gold: #b8945f;
+    --cream: #f5f0e8;
+    --fog: rgba(200,184,154,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--cream);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 60%, rgba(27,58,75,0.6) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 30%, rgba(184,148,95,0.15) 0%, transparent 50%),
+      linear-gradient(160deg, #0d1f2b 0%, #1a1610 50%, #0a1008 100%);
+    z-index: 0;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,184,154,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,184,154,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+  }
+
+  .hero-orb {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(27,58,75,0.4) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 6s ease-in-out infinite;
+    z-index: 0;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+  }
+
+  .hero-content { position: relative; z-index: 1; padding: 0 20px; }
+
+  .label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--sand);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--sand);
+  }
+
+  .hero-sub {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: rgba(245,240,232,0.6);
+    line-height: 2;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+
+  .badge {
+    display: inline-block;
+    border: 1px solid var(--sand);
+    padding: 0.4rem 1.2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--sand);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--deep);
+    padding: 1rem 3rem;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.1s forwards;
+  }
+
+  .cta-btn:hover {
+    background: var(--sand);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(184,148,95,0.3);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 2s forwards;
+    z-index: 1;
+  }
+
+  .scroll-hint span {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: rgba(200,184,154,0.5);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--sand), transparent);
+    animation: scrollDrop 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollDrop {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 20px; }
+
+  .container { max-width: 1000px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    color: var(--sand);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.4;
+    margin-bottom: 3rem;
+  }
+
+  /* ─── MARKET DATA ─── */
+  .market {
+    background: rgba(27,58,75,0.2);
+    border-top: 1px solid rgba(200,184,154,0.15);
+    border-bottom: 1px solid rgba(200,184,154,0.15);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    margin-bottom: 4rem;
+  }
+
+  .stat-card {
+    background: rgba(200,184,154,0.05);
+    padding: 2.5rem;
+    border: 1px solid rgba(200,184,154,0.1);
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .stat-card:hover {
+    background: rgba(200,184,154,0.1);
+    border-color: rgba(200,184,154,0.3);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--sand);
+    display: block;
+  }
+
+  .stat-unit {
+    font-size: 0.8rem;
+    color: var(--sand);
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: rgba(245,240,232,0.5);
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .market-desc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    color: rgba(245,240,232,0.7);
+    line-height: 2;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 600px) {
+    .market-desc { grid-template-columns: 1fr; }
+  }
+
+  /* ─── PROPERTY OUTLINE ─── */
+  .outline-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(200,184,154,0.1);
+    border: 1px solid rgba(200,184,154,0.1);
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 600px) {
+    .outline-grid { grid-template-columns: 1fr; }
+  }
+
+  .outline-item {
+    background: var(--deep);
+    padding: 2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .outline-key {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--sand);
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+
+  .outline-val {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .outline-val.blur {
+    filter: blur(5px);
+    user-select: none;
+    color: rgba(245,240,232,0.5);
+  }
+
+  .blur-note {
+    font-size: 0.75rem;
+    color: var(--sand);
+    margin-top: 2rem;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  /* ─── FORM ─── */
+  .form-section {
+    background: linear-gradient(160deg, rgba(27,58,75,0.3) 0%, rgba(26,22,16,0) 100%);
+    border-top: 1px solid rgba(200,184,154,0.2);
+  }
+
+  .form-wrap {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-intro {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .form-intro p {
+    color: rgba(245,240,232,0.6);
+    line-height: 2;
+    font-size: 0.9rem;
+  }
+
+  .field {
+    margin-bottom: 1.5rem;
+  }
+
+  .field label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--sand);
+    margin-bottom: 0.5rem;
+  }
+
+  .field input,
+  .field select {
+    width: 100%;
+    background: rgba(200,184,154,0.05);
+    border: 1px solid rgba(200,184,154,0.2);
+    color: var(--cream);
+    padding: 0.9rem 1rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+  }
+
+  .field input:focus,
+  .field select:focus {
+    border-color: var(--sand);
+  }
+
+  .field select option {
+    background: var(--deep);
+    color: var(--cream);
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 500px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: rgba(245,240,232,0.7);
+    letter-spacing: 0.05em;
+    margin-bottom: 0;
+  }
+
+  .radio-group input[type="radio"] {
+    width: auto;
+    accent-color: var(--gold);
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--gold);
+    color: var(--deep);
+    border: none;
+    padding: 1.2rem;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  .submit-btn:hover {
+    background: var(--sand);
+    box-shadow: 0 10px 40px rgba(184,148,95,0.3);
+  }
+
+  .privacy-note {
+    text-align: center;
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.3);
+    margin-top: 1.5rem;
+    line-height: 2;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 3rem 20px;
+    border-top: 1px solid rgba(200,184,154,0.1);
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.2);
+    letter-spacing: 0.15em;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 4rem 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(200,184,154,0.15);
+  }
+
+  .divider-icon {
+    color: var(--sand);
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-content">
+    <p class="label">Okinawa · Confidential Offering · 2025</p>
+    <h1>沖縄・海岸線隣接<br><em>非公開リゾート用地</em></h1>
+    <p class="hero-sub">
+      国内外ホテルブランドが注目する希少立地。<br>
+      投資家登録者のみに詳細資料を開示します。
+    </p>
+    <div class="badge">非公開案件 · 投資家限定 · 先着順</div>
+    <br>
+    <a href="#form" class="cta-btn">無料で資料を受け取る →</a>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARKET DATA -->
+<section class="market">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Market Overview</p>
+      <h2 class="section-title">なぜ今、沖縄なのか</h2>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <span class="stat-num">1,000<span class="stat-unit">万+</span></span>
+        <p class="stat-label">年間観光客数（2024年実績）</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">82<span class="stat-unit">%</span></span>
+        <p class="stat-label">リゾートホテル平均稼働率</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">12<span class="stat-unit">社+</span></span>
+        <p class="stat-label">外資系ホテルブランド進出数（直近5年）</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">3<span class="stat-unit">〜10x</span></span>
+        <p class="stat-label">主要リゾートエリアの地価上昇倍率（過去10年）</p>
+      </div>
+    </div>
+    <div class="market-desc reveal">
+      <p>コロナ禍からの急速な回復を経て、沖縄の観光需要は過去最高水準に達しています。特に高単価のラグジュアリーリゾート需要が急拡大しており、国際的なホテルチェーンによる用地取得競争が激化しています。</p>
+      <p>一方で、海岸線に隣接した大規模用地はほぼ市場に出回らない状況が続いており、非公開での取引が主流となっています。今回ご紹介する案件はその希少な機会のひとつです。</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTY OUTLINE -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Property Overview</p>
+      <h2 class="section-title">案件の概要<br><small style="font-size:0.5em; color: rgba(245,240,232,0.4)">※詳細は資料請求後に開示</small></h2>
+    </div>
+    <div class="outline-grid reveal">
+      <div class="outline-item">
+        <span class="outline-key">エリア</span>
+        <span class="outline-val">沖縄本島・海岸線隣接エリア</span>
+      </div>
+      <div class="outline-item">
+        <span class="outline-key">規模</span>
+        <span class="outline-val">大規模（詳細は資料にて開示）</span>
+      </div>
+      <div class="outline-item">
+        <span class="outline-key">用途</span>
+        <span class="outline-val">ホテル・リゾート・複合施設</span>
+      </div>
+      <div class="outline-item">
+        <span class="outline-key">価格帯</span>
+        <span class="outline-val blur">￥X,XXX,000,000</span>
+      </div>
+      <div class="outline-item">
+        <span class="outline-key">対象</span>
+        <span class="outline-val">法人・ファンド・個人富裕層</span>
+      </div>
+      <div class="outline-item">
+        <span class="outline-key">公開状況</span>
+        <span class="outline-val">非公開（登録者限定）</span>
+      </div>
+    </div>
+    <p class="blur-note reveal">※ 価格・所在地・坪数の詳細は投資家登録後に開示いたします。</p>
+
+    <div class="divider reveal">
+      <div class="divider-line"></div>
+      <span class="divider-icon">◆</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 1.5rem;" class="reveal">
+      <div style="padding: 2rem; border-left: 2px solid var(--sand);">
+        <p style="font-size: 0.7rem; letter-spacing: 0.2em; color: var(--sand); margin-bottom: 0.8rem;">POINT 01</p>
+        <p style="font-family: 'Noto Serif JP', serif; margin-bottom: 0.8rem;">海岸線隣接の希少立地</p>
+        <p style="font-size: 0.8rem; color: rgba(245,240,232,0.55); line-height: 2;">沖縄本島において海岸線に直接隣接する大規模用地は極めて希少。市場に出回ることはほとんどありません。</p>
+      </div>
+      <div style="padding: 2rem; border-left: 2px solid var(--sand);">
+        <p style="font-size: 0.7rem; letter-spacing: 0.2em; color: var(--sand); margin-bottom: 0.8rem;">POINT 02</p>
+        <p style="font-family: 'Noto Serif JP', serif; margin-bottom: 0.8rem;">複数ホテルブランドが関心</p>
+        <p style="font-size: 0.8rem; color: rgba(245,240,232,0.55); line-height: 2;">すでに国内外複数のホテルブランドから問い合わせを受けている案件です。出口戦略が描きやすい。</p>
+      </div>
+      <div style="padding: 2rem; border-left: 2px solid var(--sand);">
+        <p style="font-size: 0.7rem; letter-spacing: 0.2em; color: var(--sand); margin-bottom: 0.8rem;">POINT 03</p>
+        <p style="font-family: 'Noto Serif JP', serif; margin-bottom: 0.8rem;">先着順・案内終了予定あり</p>
+        <p style="font-size: 0.8rem; color: rgba(245,240,232,0.55); line-height: 2;">投資家登録者の増加に伴い、今月末で一般的な資料開示を終了する予定です。お早めにご登録ください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="form">
+  <div class="form-wrap">
+    <div class="form-intro reveal">
+      <p class="section-label" style="text-align:center">Registration</p>
+      <h2 class="section-title" style="text-align:center">投資家登録フォーム</h2>
+      <p>以下のフォームにご入力いただいた方に、案件の詳細資料（所在地・坪数・価格・収益シミュレーション）をお送りします。<br>情報は厳密に管理し、第三者への提供は行いません。</p>
+    </div>
+    <div class="reveal">
+      <div class="field-row">
+        <div class="field">
+          <label>お名前（必須）</label>
+          <input type="text" placeholder="山田 太郎">
+        </div>
+        <div class="field">
+          <label>会社名</label>
+          <input type="text" placeholder="○○株式会社">
+        </div>
+      </div>
+      <div class="field">
+        <label>メールアドレス（必須）</label>
+        <input type="email" placeholder="email@example.com">
+      </div>
+      <div class="field">
+        <label>電話番号</label>
+        <input type="tel" placeholder="090-0000-0000">
+      </div>
+      <div class="field">
+        <label>投資規模の目安</label>
+        <select>
+          <option value="" disabled selected>選択してください</option>
+          <option>〜1億円</option>
+          <option>1〜5億円</option>
+          <option>5〜20億円</option>
+          <option>20億円以上</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>投資家属性</label>
+        <div class="radio-group">
+          <label><input type="radio" name="type" value="individual"> 個人投資家</label>
+          <label><input type="radio" name="type" value="corp"> 法人・ファンド</label>
+          <label><input type="radio" name="type" value="overseas"> 海外投資家</label>
+        </div>
+      </div>
+      <button class="submit-btn" onclick="handleSubmit()">資料を無料で受け取る →</button>
+      <p class="privacy-note">
+        ご入力いただいた情報は、案件資料のご提供および<br>ご連絡のみに使用します。第三者への提供は行いません。
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Okinawa Real Estate Investment · Confidential · All Rights Reserved</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit() {
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = '送信中...';
+    btn.style.opacity = '0.7';
+    setTimeout(() => {
+      btn.textContent = '✓ 登録完了 — 24時間以内にご連絡します';
+      btn.style.background = '#2a5a3a';
+      btn.style.color = '#a8d5b0';
+    }, 1200);
+  }
+</script>
+</body>
+</html>
