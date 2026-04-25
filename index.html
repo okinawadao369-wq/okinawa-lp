@@ -674,48 +674,11 @@
 
   // Form submit
   function handleSubmit() {
-    const email = document.querySelector('input[type="email"]').value;
-    const nameInput = document.querySelectorAll('input[type="text"]')[0];
-    const name = nameInput ? nameInput.value : '';
-    if (!email) {
-      alert('メールアドレスを入力してください');
-      return;
-    }
+    window.open('https://docs.google.com/forms/d/e/1FAIpQLSfc2v2Gcksw1Tf1OpKDr9RQJXxQNLy6gWCeRkg1ERcIQ18K9g/viewform', '_blank');
     const btn = document.querySelector('.submit-btn');
-    btn.textContent = '送信中...';
-    btn.style.opacity = '0.7';
-
-    // Mailchimp JSONP submission
-    const u = '51014dea25';
-    const id = '962618';
-    const url = `https://us2.list-manage.com/subscribe/post-json?u=${u}&id=${id}&EMAIL=${encodeURIComponent(email)}&FNAME=${encodeURIComponent(name)}&c=mailchimpCallback`;
-
-    window.mailchimpCallback = function(data) {
-      if (data.result === 'success') {
-        btn.textContent = '✓ 登録完了 — 24時間以内にご連絡します';
-        btn.style.background = '#2a5a3a';
-        btn.style.color = '#a8d5b0';
-        btn.style.opacity = '1';
-      } else {
-        btn.textContent = '✓ 登録を受け付けました';
-        btn.style.background = '#2a5a3a';
-        btn.style.color = '#a8d5b0';
-        btn.style.opacity = '1';
-      }
-    };
-
-    const script = document.createElement('script');
-    script.src = url;
-    document.body.appendChild(script);
-
-    setTimeout(() => {
-      if (btn.textContent === '送信中...') {
-        btn.textContent = '✓ 登録完了 — 24時間以内にご連絡します';
-        btn.style.background = '#2a5a3a';
-        btn.style.color = '#a8d5b0';
-        btn.style.opacity = '1';
-      }
-    }, 3000);
+    btn.textContent = '✓ フォームを開きました — ご登録をお願いします';
+    btn.style.background = '#2a5a3a';
+    btn.style.color = '#a8d5b0';
   }
 </script>
 </body>
