@@ -674,14 +674,21 @@
 
   // Form submit
   function handleSubmit() {
+    const email = document.querySelector('input[type="email"]').value;
+    const name = document.querySelector('input[type="text"]').value;
+    if (!email) {
+      alert('メールアドレスを入力してください');
+      return;
+    }
     const btn = document.querySelector('.submit-btn');
     btn.textContent = '送信中...';
     btn.style.opacity = '0.7';
     setTimeout(() => {
+      window.open('http://eepurl.com/gXLnPjlhNf', '_blank');
       btn.textContent = '✓ 登録完了 — 24時間以内にご連絡します';
       btn.style.background = '#2a5a3a';
       btn.style.color = '#a8d5b0';
-    }, 1200);
+    }, 800);
   }
 </script>
 </body>
